@@ -24,3 +24,18 @@ const counterReducer = (state = initialState, action) => {
 
 // create a redux store
 const store = Redux.createStore(counterReducer)
+
+
+// add button listener
+
+incrementEl.addEventListener("click", () => {
+    store.dispatch({
+        type: 'increment'
+    })
+})
+
+decrementEl.addEventListener("click", () => {
+    store.dispatch({
+        type: 'decrement'
+    })
+})
