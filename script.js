@@ -10,7 +10,6 @@ const initialState = {
 
 
 // create a reducer function
-
 const counterReducer = (state = initialState, action) => {
     if (action.type === 'increment') {
         return { ...state, value: state.value + 1}
@@ -20,3 +19,8 @@ const counterReducer = (state = initialState, action) => {
         return state
     }
 }
+
+
+
+// create a redux store
+const store = Redux.createStore(counterReducer)
