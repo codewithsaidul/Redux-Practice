@@ -5,7 +5,7 @@ const decrementEl = document.getElementById('decrement');
 
 // Initial State 
 const initialState = {
-    count: 0,
+    value: 0,
 }
 
 
@@ -25,6 +25,14 @@ const counterReducer = (state = initialState, action) => {
 // create a redux store
 const store = Redux.createStore(counterReducer)
 
+
+const render = () => {
+    const state = store.getState();
+    counterEl.innerText = state.value.toString()
+}
+
+
+store.subscribe(render)
 
 // add button listener
 
