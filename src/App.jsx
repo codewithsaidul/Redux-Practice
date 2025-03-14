@@ -1,12 +1,11 @@
-// import { useState } from "react";
+
 import { Provider } from "react-redux";
-import Counter from "./counter/Counter";
 import store from "./redux/store";
-import HooksCounter from "./counter/HooksCounter";
+import HooksCounter from "./component/counter/HooksCounter";
+import DynamicCounter from "./component/dynamicCounter/DynamicCounter";
 
 
 function App() {
-  // const [count, setCount] = useState(0);
 
   return (
     <Provider store={store}>
@@ -16,8 +15,8 @@ function App() {
         </h1>
   
         <div className="max-w-md mx-auto mt-10 space-y-5">
-          <Counter />
           <HooksCounter />
+          <DynamicCounter />
         </div>
       </div>
     </Provider>

@@ -1,8 +1,10 @@
 import { legacy_createStore as createStore } from "redux";
-import counterReducer from "./counter/counterReducer";
+import rootReducer from "./rootReducer";
+
+
 
 const store = createStore(
-  counterReducer,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

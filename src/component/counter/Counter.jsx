@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { decrement, increment } from "../redux/counter/action";
+import { decrement, increment } from "../../redux/counter/action";
 
 const Counter = ({ count, increment, decrement }) => {
   return (
@@ -25,7 +25,7 @@ const Counter = ({ count, increment, decrement }) => {
 
 const mapStateToProps = (state) => {
   return {
-    count: state?.value,
+    count: state?.counter?.value,
   };
 };
 
