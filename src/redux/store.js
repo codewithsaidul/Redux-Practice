@@ -1,19 +1,15 @@
 import { applyMiddleware, legacy_createStore as createStore } from "redux";
 import rootReducer from "./rootReducer";
+import myLogger from "./loggerMiddleware";
+import logger from "redux-logger";
 
 
 
-const logger = (state) => (next) => (action) => {
-  console.log(`Actions : ${JSON.stringify(action)}`);
-  console.log(`Before Action : ${JSON.stringify(state.getState())}`)
 
-  // pass action
-  return next(action)
-}
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(logger),
+  applyMiddleware(logger, myLogger),
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
