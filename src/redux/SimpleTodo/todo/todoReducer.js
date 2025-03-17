@@ -1,10 +1,10 @@
 import {
-    ADDED,
-    ALLCLEAR,
-    ALLCOMPLETED,
-    COLORSELECTED,
-    DELETED,
-    TOGGLED,
+  ADDED,
+  ALLCLEAR,
+  ALLCOMPLETED,
+  COLORSELECTED,
+  DELETED,
+  TOGGLED,
 } from "./actionTypes";
 import { initialState } from "./initialState";
 
@@ -45,7 +45,7 @@ const todoReducer = (state = initialState, action) => {
       });
     }
     case DELETED:
-      return state.map((todo) => todo.id !== action.payload);
+      return state.filter((todo) => todo.id !== action.payload);
     case ALLCOMPLETED:
       return state.map((todo) => {
         return {

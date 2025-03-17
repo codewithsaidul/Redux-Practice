@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { colorSelected, toggleTodo } from "../../redux/SimpleTodo/todo/acion";
+import { colorSelected, deletedTodo, toggleTodo } from "../../redux/SimpleTodo/todo/acion";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
@@ -7,12 +7,18 @@ const TodoList = () => {
 
 
   // Toggled Between Complete & Uncomplete
-  const handleStatusChanged = (id) => {
-      dispatch(toggleTodo(id))
+  const handleStatusChanged = (todoId) => {
+      dispatch(toggleTodo(todoId))
   }
 
-  const handleColorSelected = (id, color) => {
-    dispatch(colorSelected(id, color))
+  // color Select
+  const handleColorSelected = (todoId, color) => {
+    dispatch(colorSelected(todoId, color))
+  }
+
+  // delete todo from redux store & ui
+  const handleDelete = (todoId) => {
+    dispatch(deletedTodo(todoId))
   }
 
   return (
@@ -60,6 +66,7 @@ const TodoList = () => {
                 src="./images/cancel.png"
                 className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
                 alt="Cancel"
+                onClick={() => handleDelete(id)}
               />
             </div>
           ))
