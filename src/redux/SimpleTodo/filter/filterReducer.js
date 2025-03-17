@@ -17,7 +17,7 @@ const filterReducer = (state = initialState, action) => {
             ...state,
             colors: [...state.colors, color],
           };
-        case "remove":
+        case "removed":
           return {
             ...state,
             colors: state.colors.filter((existing) => existing !== color),
