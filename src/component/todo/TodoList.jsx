@@ -1,12 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTodo } from "../../redux/SimpleTodo/todo/acion";
+import { colorSelected, toggleTodo } from "../../redux/SimpleTodo/todo/acion";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch()
 
+
+  // Toggled Between Complete & Uncomplete
   const handleStatusChanged = (id) => {
       dispatch(toggleTodo(id))
+  }
+
+  const handleColorSelected = (id, color) => {
+    dispatch(colorSelected(id, color))
   }
 
   return (
@@ -44,11 +50,11 @@ const TodoList = () => {
                 {title}
               </div>
 
-              <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${color === "green" && "bg-green-500"}`}></div>
+              <div onClick={() => handleColorSelected(id, "green")} className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${color === "green" && "bg-green-500"}`}></div>
   
-              <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-yellow-500 border-yellow-500 ${color === "yellow" && "bg-yellow-500"}`}></div>
+              <div onClick={() => handleColorSelected(id, "yellow")} className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-yellow-500 border-yellow-500 ${color === "yellow" && "bg-yellow-500"}`}></div>
 
-              <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-red-500 border-red-500 ${color === "red" && "bg-red-500"}`}></div>
+              <div onClick={() => handleColorSelected(id, "red")} className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-red-500 border-red-500 ${color === "red" && "bg-red-500"}`}></div>
 
               <img
                 src="./images/cancel.png"
