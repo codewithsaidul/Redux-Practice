@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 
 const TodoFooter = () => {
-  const todos = useSelector(state => state.todos)
+  const todos = useSelector(state => state.todos);
+  const todosRemaining = todos.filter(todo => !todo.completed);
+
   return (
     <div className="mt-4 flex justify-between text-xs text-gray-500">
-      <p>{todos.length} tasks left</p>
+      <p>{todosRemaining.length} tasks left</p>
       <ul className="flex space-x-1 items-center text-xs">
         <li className="cursor-pointer font-bold">All</li>
         <li>|</li>
