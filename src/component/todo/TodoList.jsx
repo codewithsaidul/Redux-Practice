@@ -1,7 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTodo } from "../../redux/SimpleTodo/todo/acion";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch()
+
+  const handleStatusChanged = (id) => {
+      dispatch(toggleTodo(id))
+  }
 
   return (
     <div className="mt-2 text-gray-700 text-sm max-h-[300px] overflow-y-auto">
@@ -19,6 +25,7 @@ const TodoList = () => {
                 <input
                   type="checkbox"
                   checked={completed}
+                  onChange={() => handleStatusChanged(id)}
                   className="opacity-0 absolute rounded-full"
                 />
                 {completed && (
