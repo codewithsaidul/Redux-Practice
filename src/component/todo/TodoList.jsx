@@ -1,75 +1,107 @@
 import { useDispatch, useSelector } from "react-redux";
-import { colorSelected, deletedTodo, toggleTodo } from "../../redux/SimpleTodo/todo/acion";
+import {
+  colorSelected,
+  deletedTodo,
+  toggleTodo,
+} from "../../redux/SimpleTodo/todo/acion";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
-  const dispatch = useDispatch()
-
+  const filtres = useSelector((state) => state.todoFilter);
+  const dispatch = useDispatch();
 
   // Toggled Between Complete & Uncomplete
   const handleStatusChanged = (todoId) => {
-      dispatch(toggleTodo(todoId))
-  }
+    dispatch(toggleTodo(todoId));
+  };
 
   // color Select
   const handleColorSelected = (todoId, color) => {
-    dispatch(colorSelected(todoId, color))
-  }
+    dispatch(colorSelected(todoId, color));
+  };
 
   // delete todo from redux store & ui
   const handleDelete = (todoId) => {
-    dispatch(deletedTodo(todoId))
-  }
+    dispatch(deletedTodo(todoId));
+  };
 
   return (
     <div className="mt-2 text-gray-700 text-sm max-h-[300px] overflow-y-auto">
       {/* <!-- todo --> */}
       {todos.length > 0
-        ? todos.map(({ id, title, completed, color }) => (
-            <div
-              key={id}
-              className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0"
-            >
-              {/* border-green-500 */}
+        ? todos
+            .filter((todo) => {
+              const { status } = filtres;
+              switch (status) {
+                case "Complete":
+                  return todo.completed;
+                case "Incomplete":
+                  return !todo.completed;
+                default:
+                  return todo;
+              }
+            })
+            .filter(todo => {
+              const { colors } = filtres;
+              if(colors.length > 0) {
+                return colors.includes(todo.color)
+              }
+              return true
+            })
+            .map(({ id, title, completed, color }) => (
               <div
-                className={`rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2  ${completed && "border-green-500 focus-within:border-green-500"}`}
+                key={id}
+                className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0"
               >
-                <input
-                  type="checkbox"
-                  checked={completed}
-                  onChange={() => handleStatusChanged(id)}
-                  className="opacity-0 absolute rounded-full"
+                {/* border-green-500 */}
+                <div
+                  className={`rounded-full bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2  ${completed && "border-green-500 focus-within:border-green-500"}`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={completed}
+                    onChange={() => handleStatusChanged(id)}
+                    className="opacity-0 absolute rounded-full"
+                  />
+                  {completed && (
+                    <svg
+                      className={`fill-current w-3 h-3 text-green-500 pointer-events-none`}
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                    </svg>
+                  )}
+                </div>
+
+                <div
+                  className={`select-none flex-1 ${completed && "line-through"}`}
+                >
+                  {title}
+                </div>
+
+                <div
+                  onClick={() => handleColorSelected(id, "green")}
+                  className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${color === "green" && "bg-green-500"}`}
+                ></div>
+
+                <div
+                  onClick={() => handleColorSelected(id, "yellow")}
+                  className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-yellow-500 border-yellow-500 ${color === "yellow" && "bg-yellow-500"}`}
+                ></div>
+
+                <div
+                  onClick={() => handleColorSelected(id, "red")}
+                  className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-red-500 border-red-500 ${color === "red" && "bg-red-500"}`}
+                ></div>
+
+                <img
+                  src="./images/cancel.png"
+                  className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
+                  alt="Cancel"
+                  onClick={() => handleDelete(id)}
                 />
-                {completed && (
-                  <svg
-                    className={`fill-current w-3 h-3 text-green-500 pointer-events-none`}
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                  </svg>
-                )}
               </div>
-
-              <div
-                className={`select-none flex-1 ${completed && "line-through"}`}
-              >
-                {title}
-              </div>
-
-              <div onClick={() => handleColorSelected(id, "green")} className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${color === "green" && "bg-green-500"}`}></div>
-  
-              <div onClick={() => handleColorSelected(id, "yellow")} className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-yellow-500 border-yellow-500 ${color === "yellow" && "bg-yellow-500"}`}></div>
-
-              <div onClick={() => handleColorSelected(id, "red")} className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-red-500 border-red-500 ${color === "red" && "bg-red-500"}`}></div>
-
-              <img
-                src="./images/cancel.png"
-                className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
-                alt="Cancel"
-                onClick={() => handleDelete(id)}
-              />
-            </div>
-          ))
+            ))
         : ""}
     </div>
   );
