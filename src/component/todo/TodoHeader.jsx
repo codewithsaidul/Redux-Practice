@@ -1,10 +1,30 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../../redux/SimpleTodo/todo/acion";
+
 const TodoHeader = () => {
+
+  const [input, setInput] = useState("");
+  const dispatch = useDispatch();
+
+  const inputChange = (e) => {
+    setInput(e.target.value);
+  }
+
+  const submitHandler = (e) => {
+      e.preventDefault();
+      dispatch(addTodo(input));
+      setInput("")
+  }
+
   return (
     <div>
-      <form className="flex items-center bg-gray-100 px-4 py-4 rounded-md">
+      <form onSubmit={submitHandler} className="flex items-center bg-gray-100 px-4 py-4 rounded-md">
         <img src="./images/notes.png" className="w-6 h-6" alt="Add todo" />
         <input
           type="text"
+          value={input}
+          onChange={inputChange}
           placeholder="Type your todo"
           className="w-full text-lg px-4 py-1 border-none outline-none bg-gray-100 text-gray-500"
         />

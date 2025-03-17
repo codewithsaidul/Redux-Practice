@@ -25,29 +25,32 @@ const TodoList = () => {
     dispatch(deletedTodo(todoId));
   };
 
+  const filterByStatus = (todo) => {
+    const { status } = filtres;
+    switch (status) {
+      case "Complete":
+        return todo.completed;
+      case "Incomplete":
+        return !todo.completed;
+      default:
+        return todo;
+    }
+  };
+  const filterByColors = (todo) => {
+    const { colors } = filtres;
+    if (colors.length > 0) {
+      return colors.includes(todo.color);
+    }
+    return true;
+  };
+
   return (
     <div className="mt-2 text-gray-700 text-sm max-h-[300px] overflow-y-auto">
       {/* <!-- todo --> */}
       {todos.length > 0
         ? todos
-            .filter((todo) => {
-              const { status } = filtres;
-              switch (status) {
-                case "Complete":
-                  return todo.completed;
-                case "Incomplete":
-                  return !todo.completed;
-                default:
-                  return todo;
-              }
-            })
-            .filter(todo => {
-              const { colors } = filtres;
-              if(colors.length > 0) {
-                return colors.includes(todo.color)
-              }
-              return true
-            })
+            .filter(filterByStatus)
+            .filter(filterByColors)
             .map(({ id, title, completed, color }) => (
               <div
                 key={id}
