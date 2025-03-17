@@ -1,8 +1,8 @@
+import React from "react";
 import { Helmet } from "react-helmet-async";
+import TodoFooter from "../../component/todo/TodoFooter";
 import TodoHeader from "../../component/todo/TodoHeader";
 import TodoList from "../../component/todo/TodoList";
-import TodoFooter from "../../component/todo/TodoFooter";
-
 const MainTodo = () => {
   return (
     <div>

@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
-import store from "./redux/store";
 import MainTodo from "./pages/todo/MainTodo";
+import store from "./redux/store";
 
 
 function App() {
