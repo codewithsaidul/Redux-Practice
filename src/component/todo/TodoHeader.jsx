@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../redux/SimpleTodo/todo/acion";
+import { addTodo, allClear, allCompleted } from "../../redux/SimpleTodo/todo/acion";
 
 const TodoHeader = () => {
 
@@ -11,10 +11,22 @@ const TodoHeader = () => {
     setInput(e.target.value);
   }
 
+
+  // add new todo
   const submitHandler = (e) => {
       e.preventDefault();
       dispatch(addTodo(input));
       setInput("")
+  }
+
+
+  // all completed handler
+  const allCompletedHandler = () => {
+    dispatch(allCompleted());
+  }
+  // all clear completed handler
+  const allClearCompletedHandler = () => {
+    dispatch(allClear());
   }
 
   return (
@@ -35,7 +47,7 @@ const TodoHeader = () => {
       </form>
 
       <ul className="flex justify-between my-4 text-xs text-gray-500">
-        <li className="flex space-x-1 cursor-pointer">
+        <li onClick={allCompletedHandler} className="flex space-x-1 cursor-pointer">
           <img
             className="w-4 h-4"
             src="./images/double-tick.png"
@@ -43,7 +55,7 @@ const TodoHeader = () => {
           />
           <span>Complete All Tasks</span>
         </li>
-        <li className="cursor-pointer">Clear completed</li>
+        <li onClick={allClearCompletedHandler} className="cursor-pointer">Clear completed</li>
       </ul>
     </div>
   );
