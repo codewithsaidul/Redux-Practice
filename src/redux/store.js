@@ -1,8 +1,7 @@
-import { applyMiddleware, legacy_createStore as createStore } from "redux";
-import rootReducer from "./rootReducer";
-import myLogger from "./loggerMiddleware";
-import logger from "redux-logger";
 import { composeWithDevTools } from '@redux-devtools/extension';
+import { applyMiddleware, legacy_createStore as createStore } from "redux";
+import { thunk } from 'redux-thunk';
+import rootReducer from "./rootReducer";
 
 
 
@@ -10,8 +9,7 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(logger, myLogger)),
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeWithDevTools(applyMiddleware(thunk)),
 );
 
 export default store;

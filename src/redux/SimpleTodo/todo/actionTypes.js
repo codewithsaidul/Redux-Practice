@@ -1,3 +1,4 @@
+export const LOADED = "simpleTodo/loaded";
 export const ADDED = "simpleTodo/added";
 export const TOGGLED = "simpleTodo/toggled";
 export const COLORSELECTED = "simpleTodo/colorselected";

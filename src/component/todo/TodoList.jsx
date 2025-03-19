@@ -1,14 +1,21 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   colorSelected,
   deletedTodo,
   toggleTodo,
 } from "../../redux/SimpleTodo/todo/acion";
+import fetchTodos from "../../redux/SimpleTodo/todo/thunk/fetchTodos";
 
 const TodoList = () => {
   const todos = useSelector((state) => state.todos);
   const filtres = useSelector((state) => state.todoFilter);
   const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(fetchTodos)
+  }, [dispatch])
 
   // Toggled Between Complete & Uncomplete
   const handleStatusChanged = (todoId) => {
@@ -36,6 +43,7 @@ const TodoList = () => {
         return todo;
     }
   };
+
   const filterByColors = (todo) => {
     const { colors } = filtres;
     if (colors.length > 0) {
@@ -51,7 +59,7 @@ const TodoList = () => {
         ? todos
             .filter(filterByStatus)
             .filter(filterByColors)
-            .map(({ id, title, completed, color }) => (
+            .map(({ id, text, completed, color }) => (
               <div
                 key={id}
                 className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0"
@@ -79,7 +87,7 @@ const TodoList = () => {
                 <div
                   className={`select-none flex-1 ${completed && "line-through"}`}
                 >
-                  {title}
+                  {text}
                 </div>
 
                 <div
