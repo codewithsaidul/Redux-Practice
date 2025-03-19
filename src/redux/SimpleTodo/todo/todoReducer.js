@@ -23,19 +23,13 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         {
           id: nextTodoId(state),
-          title: action.payload
+          text: action.payload
         },
       ];
     case TOGGLED:
-      return state.map((todo) => {
-        if (todo.id !== action.payload) {
-          return todo;
-        }
-        return {
-          ...todo,
-          completed: !todo.completed,
-        };
-      });
+      return state.map(todo =>
+        todo.id === action.payload ? { ...todo, completed: !todo.completed } : todo
+      );
     case COLORSELECTED: {
       const { todoId, todoColor } = action.payload;
       return state.map((todo) => {

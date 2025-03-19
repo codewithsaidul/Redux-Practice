@@ -15,7 +15,7 @@ const todosTask = (noTodo) => {
   }
 };
 
-const TodoFooter = () => {
+const Footer = () => {
   const todos = useSelector((state) => state.todos);
   const filter = useSelector((state) => state.todoFilter);
   const dispatch = useDispatch();
@@ -68,4 +68,4 @@ const TodoFooter = () => {
   );
 };
 
-export default TodoFooter;
+export default Footer;

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo, allClear, allCompleted } from "../../redux/SimpleTodo/todo/acion";
+import { allClear, allCompleted } from "../../redux/SimpleTodo/todo/acion";
+import addTodoServer from "../../redux/SimpleTodo/todo/thunk/addTodo";
 
-const TodoHeader = () => {
+const Header = () => {
 
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
@@ -14,10 +15,14 @@ const TodoHeader = () => {
 
   // add new todo
   const submitHandler = (e) => {
-      e.preventDefault();
-      dispatch(addTodo(input));
-      setInput("")
-  }
+    console.log("Form Submit Event Fired");
+    e.preventDefault();
+    e.stopPropagation(); 
+    console.log("Prevent Default Applied");
+    dispatch(addTodoServer(input));
+    setInput("");
+};
+
 
 
   // all completed handler
@@ -32,7 +37,7 @@ const TodoHeader = () => {
   return (
     <div>
       <form onSubmit={submitHandler} className="flex items-center bg-gray-100 px-4 py-4 rounded-md">
-        <img src="./images/notes.png" className="w-6 h-6" alt="Add todo" />
+        <img src="/images/notes.png" className="w-6 h-6" alt="Add todo" />
         <input
           type="text"
           value={input}
@@ -41,7 +46,7 @@ const TodoHeader = () => {
           className="w-full text-lg px-4 py-1 border-none outline-none bg-gray-100 text-gray-500"
         />
         <button
-          type="submit"
+           type="submit"
           className="appearance-none w-8 h-8 bg-[url('./images/plus.png')] bg-no-repeat bg-contain"
         ></button>
       </form>
@@ -61,4 +66,4 @@ const TodoHeader = () => {
   );
 };
 
-export default TodoHeader;
+export default Header;
