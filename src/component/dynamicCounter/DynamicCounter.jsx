@@ -8,10 +8,10 @@ const DynamicCounter = () => {
   const count = useSelector(state => state.counter.count)
 
   const handleIncrement = () => {
-    dispatch(counterActions.increment())
+    dispatch(counterActions.increment(5))
   }
   const handleDecrement = () => {
-    dispatch(counterActions.decrement())
+    dispatch(counterActions.decrement(2))
   }
     
     return (
