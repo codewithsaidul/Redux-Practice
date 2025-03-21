@@ -1,12 +1,11 @@
 import { Provider } from "react-redux";
-import MainTodo from "./pages/todo/MainTodo";
-import store from "./redux/store";
-
+import MainCounter from "./pages/Counter/MainCounter";
+import store from "./rtk/app/store";
 
 function App() {
   return (
     <Provider store={store}>
-        <MainTodo />
+      <MainCounter />
     </Provider>
   );
 }

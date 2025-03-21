@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
-import { colorSelected, deletedTodo, toggleTodo } from "../../redux/SimpleTodo/todo/acion";
+import todoDeleted from "../../redux/SimpleTodo/todo/thunk/deleteTodo";
+import updateColor from "../../redux/SimpleTodo/todo/thunk/updateColor";
+import updateStatus from "../../redux/SimpleTodo/todo/thunk/updateStatus";
 
 
 export default function Todo({ todo }) {
@@ -7,20 +9,20 @@ export default function Todo({ todo }) {
 
   const { text, id, completed, color } = todo;
 
-  const handleStatusChange = (todoId) => {
-    dispatch(toggleTodo(todoId));
+  const handleStatusChange = (todoId, currentStatus) => {
+    dispatch(updateStatus(todoId, currentStatus));
   };
 
   const handleColorChange = (todoId, color) => {
-    dispatch(colorSelected(todoId, color));
+    dispatch(updateColor(todoId, color));
   };
 
   const handleDelete = (todoId) => {
-    dispatch(deletedTodo(todoId));
+    dispatch(todoDeleted(todoId));
   };
 
   return (
-    <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
+    <div className="flex border-b border-gray-400/20 justify-start p-2 hover:bg-gray-100 hover:transition-all items-center last:border-0 space-x-4">
       <div
         className={`rounded-full relative bg-white border-2 border-gray-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 ${
           completed && "border-green-500 focus-within:border-green-500"
@@ -29,12 +31,12 @@ export default function Todo({ todo }) {
         <input
           type="checkbox"
           checked={completed}
-          onChange={() => handleStatusChange(id)}
-          className="opacity-0 absolute rounded-full"
+          onChange={() => handleStatusChange(id, completed)}
+          className="rounded-full absolute opacity-0"
         />
         {completed && (
           <svg
-            className="fill-current w-3 h-3 text-green-500 pointer-events-none"
+            className="h-3 text-green-500 w-3 fill-current pointer-events-none"
             viewBox="0 0 20 20"
           >
             <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
@@ -69,7 +71,7 @@ export default function Todo({ todo }) {
 
       <img
         src="/images/cancel.png"
-        className="flex-shrink-0 w-4 h-4 ml-2 cursor-pointer"
+        className="flex-shrink-0 h-4 w-4 cursor-pointer ml-2"
         alt="Cancel"
         onClick={() => handleDelete(id)}
       />
