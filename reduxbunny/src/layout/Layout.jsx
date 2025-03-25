@@ -1,13 +1,14 @@
 import React from 'react'
 import Footer from '../components/Shared/Footer'
 import Navbar from '../components/Shared/Navbar'
-import Home from '../pages/Home'
+import VideoDescription from '../pages/VideoDescription'
 
 const Layout = () => {
   return (
     <div>
       <Navbar />
-      <Home />
+      {/* <Home /> */}
+      <VideoDescription />
       <Footer />
     </div>
   )

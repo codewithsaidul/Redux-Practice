@@ -1,8 +1,11 @@
 import React from 'react'
+import Video from '../components/Video/VideoDescription'
 
 const VideoDescription = () => {
   return (
-    <div>VideoDescription</div>
+    <div>
+      <Video />
+    </div>
   )
 }
 
