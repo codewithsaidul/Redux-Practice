@@ -4,7 +4,7 @@ import VideoGrid from '../components/Home/VideoGrid'
 
 const Home = () => {
   return (
-    <div>
+    <div className='px-4 md:px-12 lg:px-20'>
       <Tags />
       <VideoGrid />
     </div>
