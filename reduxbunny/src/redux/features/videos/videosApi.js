@@ -3,7 +3,7 @@ import axios from "../../../utils/axios"
 
 
 const fetchVideos = async () => {
-    const response = await axios.get("/video")
+    const response = await axios.get("/videos")
 
     return response.data
 }
