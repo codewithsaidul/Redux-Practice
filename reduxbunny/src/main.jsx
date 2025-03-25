@@ -1,9 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
 import './index.css';
-import Layout from './layout/Layout';
 import { store } from './redux/app/store';
+import router from './router/Route';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -11,7 +12,7 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Layout />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
