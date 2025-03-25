@@ -1,8 +1,11 @@
 import React from 'react'
+import Tags from '../components/Home/Tags'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+      <Tags />
+    </div>
   )
 }
 
