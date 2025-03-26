@@ -1,22 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import fetchVideo from "./videoApi";
+import fetchRelatedVideo from "./relatedVideosApi";
+
 
 const initialState = {
-    video: {},
+    relatedVideos: [],
     isLoading: false,
     isError: false,
     error: ''
 }
 
 
-export const fetchRelatedVideoAsync = createAsyncThunk("video/fetchRelatedVideo", async (id) => {
-    const relatedVideo = await fetchVideo(id);
+export const fetchRelatedVideoAsync = createAsyncThunk("video/fetchRelatedVideos", async (id, tags) => {
+    const relatedVideo = await fetchRelatedVideo(id, tags);
     return relatedVideo
 })
 
 
 const relatedVideoSlice = createSlice({
-    name: "relatedVideo",
+    name: "relatedVideos",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -28,11 +29,11 @@ const relatedVideoSlice = createSlice({
         .addCase(fetchRelatedVideoAsync.fulfilled, (state, action) => {
             state.isError = false,
             state.isLoading = false,
-            state.video = action.payload
+            state.relatedVideos = action.payload
         })
         .addCase(fetchRelatedVideoAsync.rejected, (state, action) => {
             state.isLoading = false,
-            state.video = {},
+            state.relatedVideos = [],
             state.isError = true,
             state.error = action.error?.message
         })

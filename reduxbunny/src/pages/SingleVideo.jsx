@@ -56,7 +56,7 @@ const SingleVideo = () => {
           {/* <!-- related videos --> */}
           <div className="col-span-full lg:col-auto max-h-[570px] overflow-y-auto">
             {/* <!-- single related video --> */}
-            <RelatedVideos />
+            <RelatedVideos  />
           </div>
         </div>
       </div>
