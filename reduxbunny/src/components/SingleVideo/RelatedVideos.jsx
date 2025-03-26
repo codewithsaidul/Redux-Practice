@@ -32,13 +32,13 @@ const RelatedVideos = (id, tags) => {
     );
   }
 
-  // const { id: videoId, title, avatar, duration, thubmnail, views, date } = relatedVideos
 
   return (
     <>
       {relatedVideos.map((video) => (
         <RelatedVideo
-          id={video.Id}
+          key={video.id}
+          id={video.id}
           title={video.title}
           avatar={video.avatar}
           duration={video.duration}

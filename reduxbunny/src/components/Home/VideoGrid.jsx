@@ -6,13 +6,14 @@ import Pagination from "./Pagination";
 import Video from "./Video";
 
 const VideoGrid = () => {
-  const { videos, isLoading, isError, error } = useSelector(state => state.videos)
+  const { videos, isLoading, isError, error } = useSelector(state => state.videos);
+  const { tags, search } = useSelector(state => state.filters)
   const dispatch = useDispatch();
 
 
   useEffect(() => {
-    dispatch(fetchVideosAsync())
-  }, [dispatch])
+    dispatch(fetchVideosAsync({tags, searchValue: search}))
+  }, [dispatch, search, tags])
 
 
   if (isLoading) return <Loading />
