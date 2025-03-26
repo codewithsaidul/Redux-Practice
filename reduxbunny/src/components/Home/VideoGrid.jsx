@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchVideoAsync } from "../../redux/features/videos/VideosSlice";
+import { fetchVideosAsync } from "../../redux/features/videos/VideosSlice";
 import Loading from "../Shared/Loading";
 import Pagination from "./Pagination";
 import Video from "./Video";
@@ -9,10 +9,9 @@ const VideoGrid = () => {
   const { videos, isLoading, isError, error } = useSelector(state => state.videos)
   const dispatch = useDispatch();
 
-  console.log(isLoading)
 
   useEffect(() => {
-    dispatch(fetchVideoAsync())
+    dispatch(fetchVideosAsync())
   }, [dispatch])
 
 

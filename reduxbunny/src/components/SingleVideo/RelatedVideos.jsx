@@ -1,6 +1,6 @@
 import React from "react";
 
-const RelatedVideo = () => {
+const RelatedVideos = () => {
   return (
     <div className="w-full flex flex-row gap-2 mb-4">
       <div className="relative w-[168px] h-[94px] flex-none duration-300 hover:scale-[1.03]">
@@ -29,4 +29,4 @@ const RelatedVideo = () => {
   );
 };
 
-export default RelatedVideo;
+export default RelatedVideos;
