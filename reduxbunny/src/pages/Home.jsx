@@ -1,8 +1,13 @@
+import Balance from "../components/Home/Balance"
 
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <main className="main">
+        <div className="container">
+            <Balance />
+        </div>
+    </main>
   )
 }
 
