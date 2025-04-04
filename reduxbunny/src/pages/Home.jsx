@@ -1,5 +1,6 @@
 import Balance from "../components/Home/Balance"
 import Form from "../components/Home/Form"
+import Transactions from "../components/Home/Transactions/Transactions"
 
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
         <div className="container">
             <Balance />
             <Form />
+            <Transactions />
         </div>
     </main>
   )
