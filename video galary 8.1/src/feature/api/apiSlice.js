@@ -13,17 +13,28 @@ export const apiSlice = createApi({
         getVideo: builder.query({
             query: (id) => `/videos/${id}`
         }),
-        // ?title_like=css
         getRelatedVideos: builder.query({
             query: (title) => {
-                const tags = title.split(" ")
-                const likes = tags.map(tag => `title_like=${tag}`);
+                if (!title || title.trim() === "") {
+                    return "";  // যদি title না থাকে, তবে কোডটি কিছু রিটার্ন করবে না
+                }
+                const tags = title.split(" ").map(tag =>
+                    tag.replace(/[^\w]/g, "")  // শুধু অক্ষর, সংখ্যা আর আন্ডারস্কোর রাখো
+                );
+                const likes = tags.map(tag => `title_like=${encodeURIComponent(tag)}`);
                 const queryString = `/videos?${likes.join("&")}&_limit=3`;
                 return queryString
             }
-        })
+        }),
+        addVideo: builder.mutation({
+            query: (data) => ({
+                url: "/videos",
+                method: "POST",
+                body: data
+            })
+        }),
     })
 })
 
 
-export const { useGetVideosQuery, useGetVideoQuery, useGetRelatedVideosQuery } = apiSlice
+export const { useGetVideosQuery, useGetVideoQuery, useGetRelatedVideosQuery, useAddVideoMutation } = apiSlice
