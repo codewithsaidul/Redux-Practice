@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import deleteImage from "../../assets/delete.svg";
 import editImage from "../../assets/edit.svg";
+import { useDeleteVideoMutation } from "../../feature/api/apiSlice";
 import DescriptionLoader from "../ui/loaders/DescriptionLoader";
 
 export default function Description({
@@ -10,6 +12,19 @@ export default function Description({
   date,
   isLoading,
 }) {
+
+  const [deleteVideo, { isSuccess }] = useDeleteVideoMutation();
+  const navigate = useNavigate()
+
+  const handleDelete = () => {
+    if (id) deleteVideo(id)
+  }
+
+
+  useEffect(() => {
+    if (isSuccess) navigate("/")
+  }, [navigate, isSuccess])
+
   // check what to render
   let content = null;
 
@@ -39,7 +54,7 @@ export default function Description({
                 </span>
               </Link>
             </div>
-            <div className="flex gap-1">
+            <div onClick={handleDelete} className="flex gap-1">
               <div className="shrink-0">
                 <img className="w-5 block" src={deleteImage} alt="Delete" />
               </div>

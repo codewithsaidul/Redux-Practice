@@ -7,6 +7,8 @@ import Success from "../ui/Success";
 import TextArea from "../ui/TextArea";
 import TextInput from "../ui/TextInput";
 
+
+
 export default function Form() {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -35,33 +37,61 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("file", file); // ফাইল ডাটা
-    formData.append("upload_preset", "practice_preset"); // Cloudinary Upload Preset
-    formData.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+
+    // ================ for image =====================
+    const formDataImage = new FormData();
+    formDataImage.append("file", file); // ফাইল ডাটা
+    formDataImage.append("upload_preset", "practice_preset"); // Cloudinary Upload Preset
+    formDataImage.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+    // ================ for image =====================
+
+
+    const formDataVideo = new FormData();
+    formDataVideo.append("file", videoLink); // ফাইল ডাটা
+    formDataVideo.append("upload_preset", "practice_preset"); // Cloudinary Upload Preset
+    formDataVideo.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
 
     // file processing
     try {
       if (file === "") {
         return;
       }
-      const response = await axios.post(
+      const imageIesponse = await axios.post(
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/upload`,
-        formData
+        formDataImage
       );
-      const secrueUrl = response.data.secure_url;
+      const secrueImageUrl = imageIesponse.data.secure_url;
+
+
+      if (videoLink === "") {
+        return;
+      }
+      const videoResponse = await axios.post(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/upload`,
+        formDataVideo
+      );
+      const secrueVideoUrl = videoResponse.data.secure_url;
+
+
+
 
       await addVideo({
         title,
         author,
         description,
-        link: videoLink,
-        thumbnail: secrueUrl,
+        link: secrueVideoUrl,
+        thumbnail: secrueImageUrl,
         date,
         views,
         duration,
       });
 
+      // for (let [key, value] of formDataImage.entries()) {
+      //   console.log(`Image ${key}:`, value);
+      // }
+      // for (let [key, value] of formDataVideo.entries()) {
+      //   console.log(`Video ${key}:`, value);
+      // }
       resetForm();
     } catch (error) {
       console.log(error);
@@ -100,8 +130,8 @@ export default function Form() {
             <div className="col-span-6">
               <TextInput
                 title="YouTube Video link"
-                value={videoLink}
-                onChange={(e) => setVideoLink(e.target.value)}
+                type="file"
+                onChange={(e) => setVideoLink(e.target.files[0])}
               />
             </div>
 
@@ -109,7 +139,6 @@ export default function Form() {
               <TextInput
                 title="Thumbnail link"
                 type="file"
-                value={file}
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </div>
