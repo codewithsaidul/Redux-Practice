@@ -12,6 +12,8 @@ export default function Video() {
   const { data: video, isLoading, isError } = useGetVideoQuery(videoId);
   const { id, title, description, date, link } = video || {}
 
+  console.log(video)
+
   // check if video object empty or not
   let isVideoAvailable =
     video && typeof video === "object" && Object.keys(video).length !== 0;
