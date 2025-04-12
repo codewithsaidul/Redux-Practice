@@ -23,7 +23,7 @@ export default function Register() {
         toast.error(responseError?.data)
     }
     
-    if (data?.accessToken) {
+    if (data?.accessToken && data?.user) {
         toast.success("Account Created Successfully!")
         navigate("/inbox")
     }
