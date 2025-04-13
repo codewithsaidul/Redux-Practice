@@ -23,30 +23,17 @@
       "password": "$2a$10$9gdsxY2fcN4091dopQJmQeYlclGucTkxrBi9rtYOSPzjTZTXXMRaS",
       "name": "Saidul",
       "id": 4
+    },
+    {
+      "email": "kulsumaakther143@gmail.com",
+      "password": "$2a$10$p/V4RyqDEFhmzmEHWkqpQuNW409kIDcOmCcAo8u7wtQZCPFazVO9e",
+      "name": "Kusluma Akther",
+      "id": 5
     }
   ],
   "conversations": [
     {
-      "id": 1,
-      "participants": "sumit@learnwithsumit.com-akash@learnwithsumit.com",
-      "users": [
-        {
-          "email": "sumit@learnwithsumit.com",
-          "name": "Sumit Saha",
-          "id": 1
-        },
-        {
-          "email": "akash@learnwithsumit.com",
-          "name": "Akash Ahmed",
-          "id": 2
-        }
-      ],
-      "message": "How are you?",
-      "timestamp": 1661976143678
-    },
-    {
-      "id": 2,
-      "participants": "cws@gmail.com-akash@learnwithsumit.com",
+      "participants": "cws@gmail.com-sumit@learnwithsumit.com",
       "users": [
         {
           "email": "cws@gmail.com",
@@ -54,50 +41,85 @@
           "id": 4
         },
         {
-          "email": "akash@learnwithsumit.com",
-          "name": "Akash Hasan",
-          "id": 2
+          "email": "sumit@learnwithsumit.com",
+          "name": "Sumit Saha",
+          "id": 1
         }
       ],
-      "message": "How are you?",
-      "timestamp": 1661976143678
+      "message": "dada kemon achen???",
+      "timestamp": 1744568507786,
+      "id": 1
+    },
+    {
+      "participants": "kulsumaakther143@gmail.com-cws@gmail.com",
+      "users": [
+        {
+          "email": "cws@gmail.com",
+          "name": "Saidul",
+          "id": 4
+        },
+        {
+          "email": "kulsumaakther143@gmail.com",
+          "name": "Kusluma Akther",
+          "id": 5
+        }
+      ],
+      "message": "na re biya niya busy asilam akto",
+      "timestamp": 1744568823609,
+      "id": 2,
+      "participant": "cws@gmail.com-kulsumaakther143@gmail.com"
     }
   ],
   "messages": [
     {
-      "id": 1,
       "conversationId": 1,
       "sender": {
+        "email": "cws@gmail.com",
+        "name": "Saidul",
+        "id": 4
+      },
+      "receiver": {
         "email": "sumit@learnwithsumit.com",
         "name": "Sumit Saha",
         "id": 1
       },
-      "receiver": {
-        "email": "akash@learnwithsumit.com",
-        "name": "Akash Ahmed",
-        "id": 2
-      },
-      "message": "Hello",
-      "timestamp": 1661976143557
+      "message": "dada kemon achen???",
+      "timestamp": 1744568507786,
+      "id": 1
     },
     {
-      "id": 2,
       "conversationId": 2,
       "sender": {
-        "email": "akash@learnwithsumit.com",
-        "name": "Akash Ahmed",
-        "id": 2
+        "email": "kulsumaakther143@gmail.com",
+        "name": "Kusluma Akther",
+        "id": 5
       },
       "receiver": {
         "email": "cws@gmail.com",
         "name": "Saidul",
         "id": 4
       },
-      "message": "How are you?",
-      "timestamp": 1661976143678
+      "message": "oi koi tui",
+      "timestamp": 1744568726328,
+      "id": 2
     },
     {
-      "id": 3,
+      "conversationId": 2,
+      "sender": {
+        "email": "kulsumaakther143@gmail.com",
+        "name": "Kusluma Akther",
+        "id": 5
+      },
+      "receiver": {
+        "email": "cws@gmail.com",
+        "name": "Saidul",
+        "id": 4
+      },
+      "message": "tore phone message diya pai na kene",
+      "timestamp": 1744568746999,
+      "id": 3
+    },
+    {
       "conversationId": 2,
       "sender": {
         "email": "cws@gmail.com",
@@ -105,12 +127,13 @@
         "id": 4
       },
       "receiver": {
-        "email": "akash@learnwithsumit.com",
-        "name": "Akash Ahmed",
-        "id": 2
+        "email": "kulsumaakther143@gmail.com",
+        "name": "Kusluma Akther",
+        "id": 5
       },
-      "message": "I'm fine and you?",
-      "timestamp": 1661976143678
+      "message": "na re biya niya busy asilam akto",
+      "timestamp": 1744568823609,
+      "id": 4
     }
   ]
 }

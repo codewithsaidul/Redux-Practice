@@ -13,21 +13,20 @@ export default function Register() {
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [register, { data, isLoading, error: responseError }] =
     useRegisterMutation();
 
   useEffect(() => {
     if (responseError?.data) {
-        toast.error(responseError?.data)
-    }
-    
-    if (data?.accessToken && data?.user) {
-        toast.success("Account Created Successfully!")
-        navigate("/inbox")
+      toast.error(responseError?.data);
     }
 
+    if (data?.accessToken && data?.user) {
+      toast.success("Account Created Successfully!");
+      navigate("/inbox");
+    }
   }, [data, responseError, navigate]);
 
   const handleSubmit = (e) => {
