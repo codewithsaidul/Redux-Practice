@@ -23,24 +23,6 @@
       "password": "$2a$10$9gdsxY2fcN4091dopQJmQeYlclGucTkxrBi9rtYOSPzjTZTXXMRaS",
       "name": "Saidul",
       "id": 4
-    },
-    {
-      "email": "kulsum@gmail.com",
-      "password": "$2a$10$oBlvwUO19LyYFTorfNudE.jKyrNVF6OH.Ig08Bv9Ldd.nI3mXkOSe",
-      "name": "kulsuma",
-      "id": 5
-    },
-    {
-      "email": "boo42@gmail.com",
-      "password": "$2a$10$YYPjXVnyMABrlR5nePcrH.joqCJkPc3cMWN7bBAxSZqKNLv3Kv64O",
-      "name": "GO WEB DESIGN",
-      "id": 6
-    },
-    {
-      "email": "test@gmail.com",
-      "password": "$2a$10$N9fAbvHPP.KQWs1VYvGjvuD7k2EE7lEawleRkcID3OZvTZ102K9YG",
-      "name": "test",
-      "id": 7
     }
   ],
   "conversations": [
@@ -64,17 +46,17 @@
     },
     {
       "id": 2,
-      "participants": "sumit@learnwithsumit.com-saad@learnwithsumit.com",
+      "participants": "cws@gmail.com-akash@learnwithsumit.com",
       "users": [
         {
-          "email": "sumit@learnwithsumit.com",
-          "name": "Sumit Saha",
-          "id": 1
+          "email": "cws@gmail.com",
+          "name": "Saidul",
+          "id": 4
         },
         {
           "email": "akash@learnwithsumit.com",
-          "name": "Saad Hasan",
-          "id": 3
+          "name": "Akash Hasan",
+          "id": 2
         }
       ],
       "message": "How are you?",
@@ -100,18 +82,34 @@
     },
     {
       "id": 2,
-      "conversationId": 1,
+      "conversationId": 2,
       "sender": {
         "email": "akash@learnwithsumit.com",
         "name": "Akash Ahmed",
         "id": 2
       },
       "receiver": {
-        "email": "sumit@learnwithsumit.com",
-        "name": "Sumit Saha",
-        "id": 1
+        "email": "cws@gmail.com",
+        "name": "Saidul",
+        "id": 4
       },
       "message": "How are you?",
+      "timestamp": 1661976143678
+    },
+    {
+      "id": 3,
+      "conversationId": 2,
+      "sender": {
+        "email": "cws@gmail.com",
+        "name": "Saidul",
+        "id": 4
+      },
+      "receiver": {
+        "email": "akash@learnwithsumit.com",
+        "name": "Akash Ahmed",
+        "id": 2
+      },
+      "message": "I'm fine and you?",
       "timestamp": 1661976143678
     }
   ]
