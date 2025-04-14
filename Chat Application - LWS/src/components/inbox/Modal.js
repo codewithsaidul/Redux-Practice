@@ -81,12 +81,12 @@ export default function Modal({ open, control }) {
     e.preventDefault();
 
     if (conversations.length > 0) {
-      console.log(conversations[0]);
       editConversion({
         id: conversations[0]?.id,
         sender: myEmail,
         data: {
-          participant: `${myEmail}-${participant[0]?.email}`,
+          sender: myEmail,
+          participants: `${myEmail}-${participant[0]?.email}`,
           users: [
             loggedInUser,
             {
@@ -103,6 +103,7 @@ export default function Modal({ open, control }) {
       addConversion({
         sender: myEmail,
         data: {
+          sender: myEmail,
           participants: `${myEmail}-${participant[0]?.email}`,
           users: [
             loggedInUser,

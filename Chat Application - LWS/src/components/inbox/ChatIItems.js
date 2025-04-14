@@ -38,17 +38,24 @@ export default function ChatItems() {
         conversation?.users
       );
 
+      const senderEmail = conversation.participants.split("-")[0];
+
+      const sender = conversation.users.find((user) => user.email === senderEmail);
+      const senderName = sender?.email !== partnerEmail ? "You" : sender?.name.split(" ")[0]
+
+
       return (
         <li key={id}>
           <Link to={`/inbox/${id}`}>
-              <ChatItem
-                avatar={gravatarUrl(partnerEmail, {
-                    size: 80
-                })}
-                name={name}
-                lastMessage={message}
-                lastTime={moment(timestamp).fromNow()}
-              />
+            <ChatItem
+              avatar={gravatarUrl(partnerEmail, {
+                size: 80,
+              })}
+              name={name}
+              lastMessage={message}
+              lastTime={moment(timestamp).fromNow()}
+              senderName={senderName}
+            />
           </Link>
         </li>
       );
