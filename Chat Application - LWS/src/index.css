@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 @layer components {
-    .conversation-row-grid {
-        height: calc(100vh - 65px);
-        grid-template-rows: auto 1fr auto;
-    }
+  .conversation-row-grid {
+    height: calc(100vh - 65px);
+    grid-template-rows: auto 1fr auto;
+  }
 }
