@@ -29,8 +29,86 @@
       "password": "$2a$10$p/V4RyqDEFhmzmEHWkqpQuNW409kIDcOmCcAo8u7wtQZCPFazVO9e",
       "name": "Kusluma Akther",
       "id": 5
+    },
+    {
+      "email": "saidulislamr333@gmail.com",
+      "password": "$2a$10$gsE2F0BG3YhrG9CzU4wX8u67xbhlPxXNRdLU9C6aQ7BUcH9O8.mHa",
+      "name": "RANA",
+      "id": 6
     }
   ],
-  "conversations": [],
-  "messages": []
+  "conversations": [
+    {
+      "sender": "saidulislamr333@gmail.com",
+      "participants": "saidulislamr333@gmail.com-kulsumaakther143@gmail.com",
+      "users": [
+        {
+          "email": "saidulislamr333@gmail.com",
+          "name": "RANA",
+          "id": 6
+        },
+        {
+          "email": "kulsumaakther143@gmail.com",
+          "name": "Kusluma Akther",
+          "id": 5
+        }
+      ],
+      "message": "hello jan",
+      "timestamp": 1744653654664,
+      "id": 1
+    },
+    {
+      "sender": "kulsumaakther143@gmail.com",
+      "participants": "kulsumaakther143@gmail.com-cws@gmail.com",
+      "users": [
+        {
+          "email": "kulsumaakther143@gmail.com",
+          "name": "Kusluma Akther",
+          "id": 5
+        },
+        {
+          "email": "cws@gmail.com",
+          "name": "Saidul",
+          "id": 4
+        }
+      ],
+      "message": "hello baby",
+      "timestamp": 1744653672169,
+      "id": 2
+    }
+  ],
+  "messages": [
+    {
+      "conversationId": 1,
+      "sender": {
+        "email": "saidulislamr333@gmail.com",
+        "name": "RANA",
+        "id": 6
+      },
+      "receiver": {
+        "email": "kulsumaakther143@gmail.com",
+        "name": "Kusluma Akther",
+        "id": 5
+      },
+      "message": "hello jan",
+      "timestamp": 1744653654664,
+      "id": 1
+    },
+    {
+      "conversationId": 2,
+      "sender": {
+        "email": "kulsumaakther143@gmail.com",
+        "name": "Kusluma Akther",
+        "id": 5
+      },
+      "receiver": {
+        "email": "cws@gmail.com",
+        "name": "Saidul",
+        "id": 4
+      },
+      "message": "hello baby",
+      "timestamp": 1744653672169,
+      "id": 2
+    }
+  ]
 }

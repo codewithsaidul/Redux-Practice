@@ -50,6 +50,7 @@ export default function Modal({ open, control }) {
   // check add conversations success or edit conversations success
   useEffect(() => {
     if (isAddConversationsSuccess || isEditConversationsSuccess) {
+      setMessage("")
       control();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

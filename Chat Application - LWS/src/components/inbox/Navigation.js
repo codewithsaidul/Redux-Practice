@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logoImage from "../../assets/images/lws-logo-dark.svg";
 import { userLoggedOut } from "../../features/auth/authSlice";
 
 export default function Navigation() {
     const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth) || {};
 
     const handleLogOut = () => {
         dispatch(userLoggedOut());
@@ -21,7 +22,10 @@ export default function Navigation() {
                             alt="Learn with Sumit"
                         />
                     </Link>
-                    <ul>
+                    <ul className="flex justify-center items-center gap-2 pr-5">
+                        <li  className="text-white">
+                            <span className="cursor-pointer">{user?.name}</span>
+                        </li>
                         <li onClick={handleLogOut} className="text-white">
                             <span className="cursor-pointer">Logout</span>
                         </li>

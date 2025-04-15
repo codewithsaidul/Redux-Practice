@@ -1,3 +1,4 @@
+import io from "socket.io-client";
 import { apiSlice } from "../api/apiSlice";
 import { messagesApi } from "../messages/messagesApi";
 
@@ -6,11 +7,67 @@ export const conversationsApi = apiSlice.injectEndpoints({
     getConversions: builder.query({
       query: (email) =>
         `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=5`,
+      async onCacheEntryAdded(
+        arg,
+        { updateCachedData, cacheDataLoaded, cacheEntryRemoved }
+      ) {
+        // create socket
+        const socket = io("http://localhost:9000", {
+          reconnectionDelay: 1000,
+          reconnection: true,
+          reconnectionAttemps: 10,
+          transports: ["websocket"],
+          agent: false,
+          upgrade: false,
+          rejectUnauthorized: false,
+        });
+
+        try {
+          await cacheDataLoaded;
+          socket.on("conversation", (data) => {
+            updateCachedData((draft) => {
+              const incoming = data?.data;
+              if (!incoming?.id) return;
+
+              const conversation = draft.find(
+                // eslint-disable-next-line eqeqeq
+                (c) => c.id == incoming?.id
+              );
+              if (conversation?.id) {
+                conversation.message = incoming?.message;
+                conversation.timestamp = incoming?.timestamp;
+                conversation.sender = incoming?.sender;
+              } else {
+                // do nothing
+                const exists = draft.some((c) => Number(c.id) === incoming?.id);
+                if (!exists) {
+                  const existsMessage = draft.some(
+                    (c) =>
+                      c.message === incoming?.message &&
+                      c.sender === incoming?.sender
+                  );
+
+                  if (!existsMessage) {
+                    draft.unshift(data?.data);
+                    console.log(exists);
+                    console.log(existsMessage);
+                  }
+                  console.log(`out of context ${existsMessage}`);
+                }
+              }
+            });
+          });
+        } catch (err) {}
+        await cacheEntryRemoved;
+        socket.close();
+      },
     }),
+
     getConversation: builder.query({
       query: ({ userEmail, participantEmail }) =>
         `/conversations?participants_like=${userEmail}-${participantEmail}&&participants_like=${participantEmail}-${userEmail}`,
     }),
+
     addConversion: builder.mutation({
       query: ({ sender, data }) => ({
         url: "/conversations",
@@ -102,9 +159,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
               draftConversation.timestamp = arg?.data?.timestamp;
 
               // Sort by timestamp after updating
-              draft.sort(
-                (a, b) => b.timestamp - a.timestamp
-              );
+              draft.sort((a, b) => b.timestamp - a.timestamp);
             }
           )
         );
@@ -137,7 +192,10 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 "getMessages",
                 res?.conversationId.toString(),
                 (draft) => {
-                  draft.unshift(res);
+                  const alreadyInDraft = draft.some((m) => m.id === res.id);
+                  if (!alreadyInDraft) {
+                    draft.unshift(res);
+                  }
                 }
               )
             );
@@ -157,3 +215,5 @@ export const {
   useAddConversionMutation,
   useEditConversionMutation,
 } = conversationsApi;
+
+// http://localhost:9000/conversations?participants_like=cws@gmail.com-akash@learnwithsumit.com
